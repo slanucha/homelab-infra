@@ -22,12 +22,12 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking = {
-    hostName = "k8s-cp";
+    hostName = "k8s-wkr1";
     interfaces.enp1s0 = {
       useDHCP = false;
       ipv4.addresses = [
         {
-          address = "192.168.0.101";
+          address = "192.168.0.102";
           prefixLength = 24;
         }
       ];
@@ -105,9 +105,9 @@
 
   services.k3s = {
     enable = true;
-    role = "server";
+    role = "agent";
     token = "K10ca89922f29c01e06b5a064065db5854916811a7db066946498d469308cde205d::server:02ad6f3cb16e3afa20552184518b6e15";
-    clusterInit = true;
+    serverAddr = "https://192.168.0.101:6443";
   };
 
   # Open ports in the firewall.
